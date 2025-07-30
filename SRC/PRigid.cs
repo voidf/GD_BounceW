@@ -9,23 +9,14 @@ public partial class PRigid : RigidBody2D
     public float EXP_HorizonV = 1000f;
     [Export]
     public AnimatedSprite2D EXP_anim;
-    
+
     public override void _IntegrateForces(PhysicsDirectBodyState2D state)
     {
         base._IntegrateForces(state);
         var v = state.LinearVelocity;
         var step = state.Step;
-    }
-    public override void _Ready()
-    {
-        base._Ready();
-        EXP_anim.Play();
-    }
-    public override void _Process(double delta)
-    {
-        base._Process(delta);
-        // Rotation += 1f * (float)delta;
         var inputAxis = Vector2.Zero;
+
         if (Input.IsActionPressed("MovD"))
         {
             inputAxis.X += EXP_HorizonV;
@@ -43,22 +34,41 @@ public partial class PRigid : RigidBody2D
             inputAxis.Y -= EXP_VerticalV;
         }
 
+        int floor_idx = -1;
+        for (int i = 0; i < state.GetContactCount(); ++i)
+        {
+            var cNorm = state.GetContactLocalNormal(i);
+            if (cNorm.Dot(new Vector2(0, -1)) > .6f)
+            {
+                floor_idx = i;
+            }
+        }
+
+        if (inputAxis.LengthSquared() > 0)
+        {
+            var nv = inputAxis;
+
+        }
+
+
+    }
+    public override void _Ready()
+    {
+        base._Ready();
+        EXP_anim.Play();
+    }
+    public override void _Process(double delta)
+    {
+        base._Process(delta);
+        // Rotation += 1f * (float)delta;
+
+
         // if (Input.IsActionPressed("MovW"))
         //     v.Y -= 1;
 
         // if (Input.IsActionPressed("MovS"))
         //     v.Y += 1;
 
-        if (inputAxis.LengthSquared() > 0)
-        {
-            var nv = inputAxis * (float)delta;
-            // GD.Print($"nv: {nv}");
-
-            // ApplyForce(nv);
-            ApplyImpulse(nv);
-            // AddConstantForce(v * (float)delta * EXP_MoveSpeed);
-            // EXP_rigid.SetAxisVelocity(v);
-        }
 
         // Position = new Vector2(
         //     Mathf.Clamp(Position.X + v.X * EXP_MoveSpeed * (float)delta, 0, GetViewportRect().Size.X),
