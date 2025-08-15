@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://cqxaum8mijnby"]
+[gd_scene load_steps=38 format=4 uid="uid://cqxaum8mijnby"]
 
 [ext_resource type="Script" uid="uid://pnmvkiubap6m" path="res://SRC/PRigid.cs" id="1_jx0tx"]
 [ext_resource type="Texture2D" uid="uid://c55d63ebs64xi" path="res://ART/down.png" id="4_jx0tx"]
@@ -9,6 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://5flbteo6t8qj" path="res://ART/up.png" id="7_leciw"]
 [ext_resource type="Script" uid="uid://ljoab8lcsxyc" path="res://SRC/PinBall.cs" id="8_leciw"]
 [ext_resource type="Script" uid="uid://dyhdq7kvrbvvf" path="res://SRC/MoveBar.cs" id="9_ep3p4"]
+[ext_resource type="Texture2D" uid="uid://mvuehbdruis3" path="res://ART/square.png" id="9_f0elv"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_jx0tx"]
 size = Vector2(34, 38)
@@ -231,4 +232,8 @@ texture = ExtResource("7_jx0tx")
 script = ExtResource("8_leciw")
 
 [node name="MoveBar" type="Sprite2D" parent="."]
+modulate = Color(0.85301, 0.532125, 0.280649, 1)
+position = Vector2(281, 419)
+scale = Vector2(3.8125, 1.875)
+texture = ExtResource("9_f0elv")
 script = ExtResource("9_ep3p4")
